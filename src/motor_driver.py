@@ -1,3 +1,5 @@
+import pyb
+
 class Motor_Driver:
     """! 
     This class implements a motor driver for an ME405 kit. 
@@ -45,12 +47,11 @@ class Motor_Driver:
         else:
             self.ch1.pulse_width_percent(0)
             self.ch2.pulse_width_percent(0)
-        print (f"Setting duty cycle to {level}")
     
 if __name__ == "__main__":
-    en_pin = pyb.Pin(pyb.Pin.board.PA10, pyb.Pin.OUT_OD, pyb.Pin.PULL_UP)
-    in1pin = pyb.Pin(pyb.Pin.board.PB4, pyb.Pin.OUT_PP)
-    in2pin = pyb.Pin(pyb.Pin.board.PB5, pyb.Pin.OUT_PP)
-    tim = pyb.Timer(3, prescaler = 0 , period = 0xFFFF)
-    moe = MotorDriver(en_pin, in1pin, in2pin, tim)
+    en_pin = pyb.Pin(pyb.Pin.board.PC1, pyb.Pin.OUT_OD, pyb.Pin.PULL_UP)
+    in1pin = pyb.Pin(pyb.Pin.board.PA0, pyb.Pin.OUT_PP)
+    in2pin = pyb.Pin(pyb.Pin.board.PA1, pyb.Pin.OUT_PP)
+    tim = pyb.Timer(5, prescaler = 0 , period = 0xFFFF)
+    moe = Motor_Driver(en_pin, in1pin, in2pin, tim)
     moe.set_duty_cycle(90)
