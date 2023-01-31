@@ -1,9 +1,12 @@
-class PropotionalControl:
+import utime
+
+class Position_Control:
     
     def __init__(self, gain, setpoint):
         self.gain = gain
         self.setpoint = setpoint
-
+        self.values = [[], []]
+        self.time = utime.ticks_ms()
 
     def run(self, measured):
         return self.gain * (self.setpoint - measured)
