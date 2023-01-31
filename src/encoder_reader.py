@@ -6,6 +6,7 @@ This file contains code definitions for encoder behavior.
 @copyright (c) 2023 by Nobody and released under GNU Public License v3
 """
 import time
+import pyb
 
 def enc_read():
     pinB6= pyb.Pin(pyb.Pin.board.PB6, pyb.Pin.IN)            #set pinB6 to input
@@ -41,8 +42,8 @@ class Encoder_Reader:
         self.zero()
 
     def read(self):
-        self.prev_pos = self.timer4.counter() - self.reference_count
-        return self.prev_pos
+        self.prev_pos = self.timer4.counter() 
+        return self.prev_pos - self.reference_count
             #print(current_count)
 
     def zero(self):
@@ -50,10 +51,13 @@ class Encoder_Reader:
 
     def handleflow(self, tim):
         current = self.timer4.counter()
+        print("Hello World: ",current)
         if(current < self.prev_pos):
             self.reference_count -= 0xFFFF
+            print("Wow Wow")
         else:
             self.reference_count += 0xFFFF
+            print("Very cool")
 
 if __name__ == "__main__":
     en1_pin = pyb.Pin(pyb.Pin.board.PB6, pyb.Pin.IN)
