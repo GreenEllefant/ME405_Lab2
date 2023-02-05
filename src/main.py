@@ -56,11 +56,13 @@ def main():
     m = Motor_Driver(en_pin, in1pin, in2pin, timer5)
     
     # Set up control class
-    Kp = 0.1
+    Kp = 0.05
+    # Move to these positions
     setpoints = [4000, 8000, 12000, 16000]
     c = Position_Control(Kp, setpoints[0], e, m)
     
     # main loop
+    # Move to each set point for 3 seconds
     for i in setpoints:
         stop = utime.ticks_ms()+3000
         while utime.ticks_ms() < stop:
@@ -70,9 +72,7 @@ def main():
         c.print_values()
         c.reset_values()
     m.set_duty_cycle(0)
-    while True:
-        print(e.read())
-        utime.sleep_ms(250)
+    print("END OF PROGRAM")
     
 if __name__ == "__main__":
     main()
