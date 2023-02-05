@@ -6,6 +6,8 @@ import utime
 #import position_control
 import encoder_reader
 from motor_driver import Motor_Driver
+#from serial_practice import plotter
+import serial
 
 #------------ Position control Code
 
@@ -38,8 +40,36 @@ class Position_Control:
     def print_values(self):
         for i in range(0, len(self.values[0])):
             print(str(self.values[0][i]) + "," + str(self.values[1][i]))
+        with serial.Serial('COM4', 115200) as serialPort:
+            for i in range(0, len(self.values[0])):
+                serialPort.write(f"{self.values[0][i]} + "," + {self.values[1][i]}\r\n")
 
 #----------------------------------------------
+
+#----------------- serial practice
+
+
+def plotter():
+
+    with serial.Serial('COM4', 115200) as serialPort:
+        val_list = serialPort.readline().split(b',')
+
+        get_axis = ('time in seconds', 'position in encoder ticks')              #isolate axis titles
+        xpoints =[]
+        ypoints =[]
+        for i in range(len(val_list)-1):
+            try:
+                xpoints.append(float(val_list[i][0]))            #add only numerical values to plot list
+                ypoints.append(float(val_list[i][1]))
+            except ValueError:
+                continue
+
+        pyplot.plot(xpoints, ypoints)           
+        pyplot.xlabel(get_axis[0])
+        pyplot.ylabel(get_axis[1])
+        pyplot.show()
+#------------------
+
 
 def main():
     # Set up encoder
@@ -59,20 +89,24 @@ def main():
     Kp = 0.05
     # Move to these positions
     setpoints = [4000, 8000, 12000, 16000]
-    c = Position_Control(Kp, setpoints[0], e, m)
+    c = Position_Control(Kp, 0, e, m)
     
     # main loop
-    # Move to each set point for 3 seconds
-    for i in setpoints:
+    # Run tests for 3s each
+    while True:
+        Kp = float(input("\n  Kp: "))
+        c.set_Kp(Kp)
         stop = utime.ticks_ms()+3000
         while utime.ticks_ms() < stop:
-            c.run(i)
+            c.run(4000)
             utime.sleep_ms(10)
+        m.set_duty_cycle(0)
         e.zero()
         c.print_values()
         c.reset_values()
-    m.set_duty_cycle(0)
     print("END OF PROGRAM")
+    
+    
     
 if __name__ == "__main__":
     main()
