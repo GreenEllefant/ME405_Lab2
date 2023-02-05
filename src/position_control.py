@@ -1,5 +1,5 @@
 class Position_Control:
-        """! 
+    """! 
     This class implements a closed loop position control for a motor
     
     @author Jack Ellsworth, Hannah Howe, Mathew Smith
