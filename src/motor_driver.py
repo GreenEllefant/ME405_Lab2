@@ -8,7 +8,7 @@ import pyb
     @date   30-Jan-2023
     @copyright (c) 2023 by Nobody and released under GNU Public License v3
 """
-class MotorDriver:
+class Motor_Driver:
     """! 
     This class implements a motor driver for an ME405 kit. 
     """
