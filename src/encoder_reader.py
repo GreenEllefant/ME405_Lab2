@@ -39,14 +39,18 @@ class Encoder_Reader:
         return self.prev_pos - self.reference_count
 
     def zero(self):
+        """!
+        @details: this function zeros the encoder value, resetting it to 0
+        """
         self.reference_count = self.timer4.counter()
 
-    """!
-    @details: this function controls the response of overflow or underflow on the encoder
-    starts count over after 1 full rotation
-    recognizes when the encoder moves backwards
-    """
+    
     def handleflow(self, tim):
+        """!
+        @details: this function controls the response of overflow or underflow on the encoder
+        starts count over after 1 full rotation
+        recognizes when the encoder moves backwards
+        """
         current = self.timer4.counter()
         print("Hello World: ",current)
         if(current < self.prev_pos):

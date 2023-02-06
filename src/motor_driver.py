@@ -1,12 +1,12 @@
-import pyb
-
-"""! 
+"""! @motor_driver.py
     This file contains a motor driver for an ME405 kit. 
     
     @author Jack Ellsworth, Hannah Howe, Mathew Smith
     @date   5-Feb-2023
     @copyright (c) 2023 by Nobody and released under GNU Public License v3
 """
+
+import pyb
 class Motor_Driver:
     """! 
     This class implements a motor driver for an ME405 kit. 

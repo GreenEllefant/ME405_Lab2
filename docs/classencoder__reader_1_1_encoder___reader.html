@@ -76,14 +76,11 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:abe0d45c724ef91cb5b82941203f9e902"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classencoder__reader_1_1_encoder___reader.html#abe0d45c724ef91cb5b82941203f9e902">__init__</a> (self, en1_pin, en2_pin, timer4)</td></tr>
 <tr class="memdesc:abe0d45c724ef91cb5b82941203f9e902"><td class="mdescLeft">&#160;</td><td class="mdescRight">This class contains code for reading the encoder.  <br /></td></tr>
 <tr class="separator:abe0d45c724ef91cb5b82941203f9e902"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab3c65938e07bbf11e35f0dad9ec5954a"><td class="memItemLeft" align="right" valign="top"><a id="ab3c65938e07bbf11e35f0dad9ec5954a" name="ab3c65938e07bbf11e35f0dad9ec5954a"></a>
-def&#160;</td><td class="memItemRight" valign="bottom"><b>read</b> (self)</td></tr>
+<tr class="memitem:ab3c65938e07bbf11e35f0dad9ec5954a"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classencoder__reader_1_1_encoder___reader.html#ab3c65938e07bbf11e35f0dad9ec5954a">read</a> (self)</td></tr>
 <tr class="separator:ab3c65938e07bbf11e35f0dad9ec5954a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0eaafc58e31cee13ad17932bfa8f12e9"><td class="memItemLeft" align="right" valign="top"><a id="a0eaafc58e31cee13ad17932bfa8f12e9" name="a0eaafc58e31cee13ad17932bfa8f12e9"></a>
-def&#160;</td><td class="memItemRight" valign="bottom"><b>zero</b> (self)</td></tr>
+<tr class="memitem:a0eaafc58e31cee13ad17932bfa8f12e9"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classencoder__reader_1_1_encoder___reader.html#a0eaafc58e31cee13ad17932bfa8f12e9">zero</a> (self)</td></tr>
 <tr class="separator:a0eaafc58e31cee13ad17932bfa8f12e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a663aedf60c43e14bb329ca1a198d8bff"><td class="memItemLeft" align="right" valign="top"><a id="a663aedf60c43e14bb329ca1a198d8bff" name="a663aedf60c43e14bb329ca1a198d8bff"></a>
-def&#160;</td><td class="memItemRight" valign="bottom"><b>handleflow</b> (self, tim)</td></tr>
+<tr class="memitem:a663aedf60c43e14bb329ca1a198d8bff"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classencoder__reader_1_1_encoder___reader.html#a663aedf60c43e14bb329ca1a198d8bff">handleflow</a> (self, tim)</td></tr>
 <tr class="separator:a663aedf60c43e14bb329ca1a198d8bff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
@@ -160,6 +157,74 @@ Public Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a663aedf60c43e14bb329ca1a198d8bff" name="a663aedf60c43e14bb329ca1a198d8bff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a663aedf60c43e14bb329ca1a198d8bff">&#9670;&#160;</a></span>handleflow()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def encoder_reader.Encoder_Reader.handleflow </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>tim</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>: this function controls the response of overflow or underflow on the encoder starts count over after 1 full rotation recognizes when the encoder moves backwards </p>
+
+</div>
+</div>
+<a id="ab3c65938e07bbf11e35f0dad9ec5954a" name="ab3c65938e07bbf11e35f0dad9ec5954a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab3c65938e07bbf11e35f0dad9ec5954a">&#9670;&#160;</a></span>read()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def encoder_reader.Encoder_Reader.read </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>: this function returns the new posistion of the encoder based on its previous position </p>
+
+</div>
+</div>
+<a id="a0eaafc58e31cee13ad17932bfa8f12e9" name="a0eaafc58e31cee13ad17932bfa8f12e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0eaafc58e31cee13ad17932bfa8f12e9">&#9670;&#160;</a></span>zero()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def encoder_reader.Encoder_Reader.zero </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>: this function zeros the encoder value, resetting it to 0 </p>
 
 </div>
 </div>
