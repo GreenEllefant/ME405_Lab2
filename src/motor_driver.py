@@ -1,13 +1,17 @@
 import pyb
 
-class Motor_Driver:
-    """! 
-    This class implements a motor driver for an ME405 kit. 
+
+"""! 
+    This file contains a motor driver for an ME405 kit. 
     
     @author Jack Ellsworth, Hannah Howe, Mathew Smith
     @date   30-Jan-2023
     @copyright (c) 2023 by Nobody and released under GNU Public License v3
 """
+class MotorDriver:
+    """! 
+    This class implements a motor driver for an ME405 kit. 
+    """
 
     def __init__ (self, en_pin, in1pin, in2pin, timer):
         """! 

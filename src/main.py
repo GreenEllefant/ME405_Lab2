@@ -5,41 +5,45 @@ main
 import utime
 #import position_control
 import encoder_reader
+from position_control import Position_Control
 from motor_driver import Motor_Driver
+from pyb import UART
+pyb.repl_uart(None)
 
-#------------ Position control Code
-
-class Position_Control:
-    
-    def __init__(self, gain, setpoint, encoder, motor):
-        self.gain = gain
-        self.setpoint = setpoint
-        self.values = [[], []]
-        self.encoder = encoder
-        self.motor = motor
-        self.time = utime.ticks_ms()
-
-    def run(self, setpoint):
-        self.setpoint = setpoint
-        self.values[0].append(utime.ticks_ms() - self.time)
-        self.values[1].append(self.encoder.read())
-        self.motor.set_duty_cycle(self.gain * (self.setpoint - self.encoder.read()))
-
-    def reset_values(self):
-        self.values = [[], []]
-        self.time = utime.ticks_ms()
-
-    def set_setpoint(self, setpoint):
-        self.setpoint = setpoint
-    
-    def set_Kp(self, gain):
-        self.gain = gain
-
-    def print_values(self):
-        for i in range(0, len(self.values[0])):
-            print(str(self.values[0][i]) + "," + str(self.values[1][i]))
-
-#----------------------------------------------
+# #------------ Position control Code
+# 
+# class Position_Control:
+#     
+#     def __init__(self, gain, setpoint, encoder, motor):
+#         self.gain = gain
+#         self.setpoint = setpoint
+#         self.values = [[], []]
+#         self.encoder = encoder
+#         self.motor = motor
+#         self.time = utime.ticks_ms()
+# 
+#     def run(self, setpoint):
+#         self.setpoint = setpoint
+#         self.values[0].append(utime.ticks_ms() - self.time)
+#         self.values[1].append(self.encoder.read())
+#         self.motor.set_duty_cycle(self.gain * (self.setpoint - self.encoder.read()))
+# 
+#     def reset_values(self):
+#         self.values = [[], []]
+#         self.time = utime.ticks_ms()
+# 
+#     def set_setpoint(self, setpoint):
+#         self.setpoint = setpoint
+#     
+#     def set_Kp(self, gain):
+#         self.gain = gain
+# 
+#     def print_values(self):
+#         for i in range(0, len(self.values[0])):
+#             print(str(self.values[0][i]) + "," + str(self.values[1][i]))
+#         
+# 
+# #----------------------------------------------
 
 def main():
     # Set up encoder
@@ -55,24 +59,37 @@ def main():
     timer5 = pyb.Timer(5, prescaler = 0, period = 0xFFFF)
     m = Motor_Driver(en_pin, in1pin, in2pin, timer5)
     
+    
     # Set up control class
     Kp = 0.05
     # Move to these positions
     setpoints = [4000, 8000, 12000, 16000]
-    c = Position_Control(Kp, setpoints[0], e, m)
+    c = Position_Control(Kp, 0, e, m)
+    
+    # Set up serial stuff
+    u2 = pyb.UART(2, baudrate=115200)      # Set up the second USB-serial port
     
     # main loop
-    # Move to each set point for 3 seconds
-    for i in setpoints:
+    # Run tests for 3s each
+    while True:
+        Kp = float(input("\n  Kp: "))
+        c.set_Kp(Kp)
+        c.reset_values()
         stop = utime.ticks_ms()+3000
         while utime.ticks_ms() < stop:
-            c.run(i)
+            c.run(4000)
             utime.sleep_ms(10)
+        m.set_duty_cycle(0)
         e.zero()
         c.print_values()
-        c.reset_values()
-    m.set_duty_cycle(0)
+        print(len(c.values[1]))
+        u2.write(f"{len(c.values[1])}\r\n")
+        u2.write(f"{Kp}\r\n")
+        for i in range(0, len(c.values[0])):
+            u2.write(f"{c.values[0][i]},{c.values[1][i]}\r\n")
     print("END OF PROGRAM")
+    
+    
     
 if __name__ == "__main__":
     main()
