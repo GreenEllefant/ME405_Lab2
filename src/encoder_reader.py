@@ -2,7 +2,7 @@
 This file contains code definitions for encoder behavior. 
 
 @author Jack Ellsworth, Hannah Howe, Mathew Smith
-@date   24-Jan-2023
+@date   5-Feb-2023
 @copyright (c) 2023 by Nobody and released under GNU Public License v3
 """
 import time
@@ -32,7 +32,8 @@ class Encoder_Reader:
 
     def read(self):
         """!
-        
+        @details: this function returns the new posistion of the encoder based on
+        its previous position
         """
         self.prev_pos = self.timer4.counter() 
         return self.prev_pos - self.reference_count
@@ -40,6 +41,11 @@ class Encoder_Reader:
     def zero(self):
         self.reference_count = self.timer4.counter()
 
+    """!
+    @details: this function controls the response of overflow or underflow on the encoder
+    starts count over after 1 full rotation
+    recognizes when the encoder moves backwards
+    """
     def handleflow(self, tim):
         current = self.timer4.counter()
         print("Hello World: ",current)

@@ -1,12 +1,20 @@
 """! @Serial_plotter.py
     This file waits for the board to send data through the computer's COM5 serial port.
+    Utilizes the Python PC compiler
     @author Jack Ellsworth, Hannah Howe, Mathew Smith
-    @date   30-Jan-2023
+    @date   5-Feb-2023
     @copyright (c) 2023 by Nobody and released under GNU Public License v3
 """
 
 import serial
 from matplotlib import pyplot
+
+"""!
+@details: 
+uses serial port to take in position and time data as 2D byte array
+will return a plot of the points, number of points determined by response sent via UART
+first two values read are length of data set and chosen gain respectively
+"""
 
 def plotter():
     val_list = []                                       
