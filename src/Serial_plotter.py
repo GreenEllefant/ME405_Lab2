@@ -1,3 +1,10 @@
+"""! @Serial_plotter.py
+    This file waits for the board to send data through the computer's COM5 serial port.
+    @author Jack Ellsworth, Hannah Howe, Mathew Smith
+    @date   30-Jan-2023
+    @copyright (c) 2023 by Nobody and released under GNU Public License v3
+"""
+
 import serial
 from matplotlib import pyplot
 
@@ -30,6 +37,6 @@ def plotter():
 
 def main():
     plotter()
-
-if __name__ == "__main__":
+    
+if name == "__main__":
     main()

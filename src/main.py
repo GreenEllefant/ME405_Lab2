@@ -52,8 +52,6 @@ def main():
         for i in range(0, len(c.values[0])):
             u2.write(f"{c.values[0][i]},{c.values[1][i]}\r\n")
     print("END OF PROGRAM")
-    
-    
-    
+
 if __name__ == "__main__":
     main()
