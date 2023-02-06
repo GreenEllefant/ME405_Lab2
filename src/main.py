@@ -1,5 +1,13 @@
-'''!
-main
+'''! @main.py
+    This file sets up the motor, encoder, and a position controller. The program accepts a
+    control parameter 'Kp' and then runs the motor for one rotation. The position is recorded
+    every 10ms and once the run is complete the run data is sent via serial port. The data
+    sent is the number of data points, the Kp value, and the time and position separated by
+    a comma. The file 'Serial_plotter.py' receives and plots this data. 
+    
+    @author Jack Ellsworth, Hannah Howe, Mathew Smith
+    @date   05-Feb-2023
+    @copyright (c) 2023 by Nobody and released under GNU Public License v3
 '''
 
 import utime
