@@ -5,6 +5,8 @@
     @date   05-Feb-2023
     @copyright (c) 2023 by Nobody and released under GNU Public License v3
 """
+import utime
+
 class Position_Control:
     """! 
     This class implements a closed loop position control for a motor
