@@ -1,10 +1,13 @@
-class Position_Control:
-    """! 
-    This class implements a closed loop position control for a motor
+"""! 
+    This file contains the Position Control class
     
     @author Jack Ellsworth, Hannah Howe, Mathew Smith
     @date   05-Feb-2023
     @copyright (c) 2023 by Nobody and released under GNU Public License v3
+"""
+class Position_Control:
+    """! 
+    This class implements a closed loop position control for a motor
     """
     def __init__(self, gain, setpoint, encoder, motor):
         """! 
