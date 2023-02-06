@@ -1,6 +1,5 @@
 import pyb
 
-
 """! 
     This file contains a motor driver for an ME405 kit. 
     

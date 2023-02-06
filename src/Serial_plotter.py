@@ -2,12 +2,11 @@ import serial
 from matplotlib import pyplot
 
 def plotter():
-    val_list = []
+    val_list = []                                       
     with serial.Serial('COM5', 115200) as serialPort:
         print(serialPort.name)
         thing = serialPort.readline().split(b',')
         kp = serialPort.readline().split(b',')
-        #print(thing[0])
         for i in range(int(thing[0])):
             item = serialPort.readline().split(b',')
             val_list.append(item)
@@ -28,4 +27,9 @@ def plotter():
         pyplot.xlabel(get_axis[0])
         pyplot.ylabel(get_axis[1])
         pyplot.show()
-plotter()
+
+def main():
+    plotter()
+
+if __name__ == "__main__":
+    main()
