@@ -7,7 +7,8 @@ import utime
 import encoder_reader
 from motor_driver import Motor_Driver
 #from serial_practice import plotter
-import serial
+from pyb import UART
+pyb.repl_uart(None)
 
 #------------ Position control Code
 
@@ -40,36 +41,9 @@ class Position_Control:
     def print_values(self):
         for i in range(0, len(self.values[0])):
             print(str(self.values[0][i]) + "," + str(self.values[1][i]))
-        with serial.Serial('COM4', 115200) as serialPort:
-            for i in range(0, len(self.values[0])):
-                serialPort.write(f"{self.values[0][i]} + "," + {self.values[1][i]}\r\n")
+        
 
 #----------------------------------------------
-
-#----------------- serial practice
-
-
-def plotter():
-
-    with serial.Serial('COM4', 115200) as serialPort:
-        val_list = serialPort.readline().split(b',')
-
-        get_axis = ('time in seconds', 'position in encoder ticks')              #isolate axis titles
-        xpoints =[]
-        ypoints =[]
-        for i in range(len(val_list)-1):
-            try:
-                xpoints.append(float(val_list[i][0]))            #add only numerical values to plot list
-                ypoints.append(float(val_list[i][1]))
-            except ValueError:
-                continue
-
-        pyplot.plot(xpoints, ypoints)           
-        pyplot.xlabel(get_axis[0])
-        pyplot.ylabel(get_axis[1])
-        pyplot.show()
-#------------------
-
 
 def main():
     # Set up encoder
@@ -91,11 +65,15 @@ def main():
     setpoints = [4000, 8000, 12000, 16000]
     c = Position_Control(Kp, 0, e, m)
     
+    # Set up serial stuff
+    u2 = pyb.UART(2, baudrate=115200)      # Set up the second USB-serial port
+    
     # main loop
     # Run tests for 3s each
     while True:
         Kp = float(input("\n  Kp: "))
         c.set_Kp(Kp)
+        c.reset_values()
         stop = utime.ticks_ms()+3000
         while utime.ticks_ms() < stop:
             c.run(4000)
@@ -103,7 +81,11 @@ def main():
         m.set_duty_cycle(0)
         e.zero()
         c.print_values()
-        c.reset_values()
+        print(len(c.values[1]))
+        u2.write(f"{len(c.values[1])}\r\n")
+        u2.write(f"{Kp}\r\n")
+        for i in range(0, len(c.values[0])):
+            u2.write(f"{c.values[0][i]},{c.values[1][i]}\r\n")
     print("END OF PROGRAM")
     
     
